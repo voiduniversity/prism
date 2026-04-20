@@ -25,7 +25,7 @@ def newPython():
     
     return example
 
-def placeholderFrame(root):
+def easyFrame(root):
 
     timerFont = ctk.CTkFont(family="Inter", 
                     size=24,

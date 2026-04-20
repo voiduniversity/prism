@@ -8,7 +8,7 @@ from PIL import Image
 
 # Import Modules // Frames
 from dashboardModule import dashboardFrame
-from placeholderModule import placeholderFrame, newPython
+from easyCode import easyFrame, newPython
 
 appearance = "light" # Default
 
@@ -123,7 +123,7 @@ def codeType():
     # Frames // Imported from different modules
     python = newPython() # Int -> length of chars in python coding
     dashboard = dashboardFrame(root, python) # Frame -> root (mainApp), python (Int)
-    placeholder = placeholderFrame(root) # Frame -> root (mainApp)
+    easy = easyFrame(root) # Frame -> root (mainApp)
 
 
 
@@ -140,11 +140,11 @@ def codeType():
         dashboard.place(y=0)
 
         # Get rid of current frame
-        placeholder.place(y=721)
+        easy.place(y=721)
     
     def easyMenu():
         # Place new frame
-        placeholder.place(y=0)
+        easy.place(y=0)
 
         # Get rid of current frame
         dashboard.place(y=721)
@@ -206,13 +206,14 @@ def codeType():
     universityLabel.place(x=44, y=632)
 
 
-    placeholder.place(x=0, y=721)
+    easy.place(x=0, y=721)
 
     root.mainloop()
 
 def currentDirectory():
     try:
-        os.chdir(r"/Users/paycheckbelfast/workspace/vscode/workspace/ctkprojects/typingtest/thirdversion")
+        currentDir = os.getcwd()
+        os.chdir(currentDir)
     except Exception as e:
         print("There is not file at this directory or wrong path directory.")
 
