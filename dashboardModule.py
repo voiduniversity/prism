@@ -2,6 +2,8 @@ import customtkinter as ctk
 import tkinter as tk
 import threading
 import time
+import os
+
 from PIL import Image
 
 score = "rightandwrong.txt"
@@ -13,6 +15,7 @@ def dashboardFrame(root, python):
 
     def watchScoreFile():
         global userScore
+
         while True:
             time.sleep(0.1)
             print("Threading works")
@@ -43,6 +46,8 @@ def dashboardFrame(root, python):
     watchScore = threading.Thread(target=watchScoreFile, daemon=True)
     watchScore.start()
 
+    currentDir = os.getcwd()
+
 
     widgetFont = ctk.CTkFont(family="Inter 24pt", 
                         size=16, 
@@ -58,9 +63,9 @@ def dashboardFrame(root, python):
     dashboard = ctk.CTkFrame(root, fg_color="#121212", width=1280, height=720)
 
     # Images
-    missedImage = ctk.CTkImage(light_image=Image.open("/Users/paycheckbelfast/workspace/vscode/workspace/ctkprojects/typingtest/elements/dangerous.png"), dark_image=Image.open("/Users/paycheckbelfast/workspace/vscode/workspace/ctkprojects/typingtest/elements/dangerous.png"), size=(23, 23))
-    accuracyImage = ctk.CTkImage(light_image=Image.open("/Users/paycheckbelfast/workspace/vscode/workspace/ctkprojects/typingtest/elements/accuracy.png"), dark_image=Image.open("/Users/paycheckbelfast/workspace/vscode/workspace/ctkprojects/typingtest/elements/accuracy.png"), size=(23, 23))
-    wpmImage = ctk.CTkImage(light_image=Image.open("/Users/paycheckbelfast/workspace/vscode/workspace/ctkprojects/typingtest/elements/keyboard.png"), dark_image=Image.open("/Users/paycheckbelfast/workspace/vscode/workspace/ctkprojects/typingtest/elements/keyboard.png"), size=(23, 23))
+    missedImage = ctk.CTkImage(light_image=Image.open(f"{currentDir}/elements/dangerous.png"), dark_image=Image.open(f"{currentDir}/elements/dangerous.png"), size=(23, 23))
+    accuracyImage = ctk.CTkImage(light_image=Image.open(f"{currentDir}/elements/accuracy.png"), dark_image=Image.open(f"{currentDir}/elements/accuracy.png"), size=(23, 23))
+    wpmImage = ctk.CTkImage(light_image=Image.open(f"{currentDir}/elements/keyboard.png"), dark_image=Image.open(f"{currentDir}/elements/keyboard.png"), size=(23, 23))
 
     # Apeparance // Frames
     widget1 = ctk.CTkFrame(dashboard, fg_color="#121212", border_width=1, border_color="#636363", width=308, height=177, corner_radius=29)

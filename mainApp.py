@@ -21,9 +21,11 @@ ctk.set_appearance_mode("dark")
 ctk.set_default_color_theme("blue")  
 
 def codeType():
+    currentDir = os.getcwd()
+
     root = ctk.CTk()
     root.title("prism // @voiduniversity")
-    root.iconbitmap(r"/Users/paycheckbelfast/workspace/vscode/workspace/ctkprojects/typingtest/elements/icon.ico")
+    root.iconbitmap(f"{currentDir}/elements/icon.ico")
 
     # codeType width x height
     rootWidth = 1280
@@ -129,8 +131,8 @@ def codeType():
 
 
     # Create Icons for menu buttons // CustomTkinter Image Utility with Pillow Package
-    dashboardIcon = ctk.CTkImage(light_image=Image.open("/Users/paycheckbelfast/VS Code/workspace/ctkprojects/typingtest/elements/Mask.png"), dark_image=Image.open("/Users/paycheckbelfast/VS Code/workspace/ctkprojects/typingtest/elements/Mask.png"), size=(20, 20))
-    easyIcon = ctk.CTkImage(light_image=Image.open("/Users/paycheckbelfast/VS Code/workspace/ctkprojects/typingtest/elements/Pixel.png"), dark_image=Image.open("/Users/paycheckbelfast/VS Code/workspace/ctkprojects/typingtest/elements/Pixel.png"), size=(20, 20))
+    dashboardIcon = ctk.CTkImage(light_image=Image.open(f"{currentDir}/elements/Mask.png"), dark_image=Image.open(f"{currentDir}/elements/Mask.png"), size=(20, 20))
+    easyIcon = ctk.CTkImage(light_image=Image.open(f"{currentDir}/elements/Pixel.png"), dark_image=Image.open(f"{currentDir}/elements/Pixel.png"), size=(20, 20))
 
 
 
@@ -151,7 +153,7 @@ def codeType():
 
 
     # Text Labels
-    logo = ctk.CTkLabel(root, text="coding*", font=logoFont, text_color="#F2F2F2")
+    logo = ctk.CTkLabel(root, text="prism", font=logoFont, text_color="#F2F2F2")
 
     plusElement = ctk.CTkLabel(root, text="+", font=logoFont, text_color="#F2F2F2")
 
@@ -212,10 +214,10 @@ def codeType():
 
 def currentDirectory():
     try:
-        currentDir = os.getcwd()
-        os.chdir(currentDir)
+        currentDir = os.getcwd() # Get current directory
+        os.chdir(currentDir) # Use currentDir
     except Exception as e:
-        print("There is not file at this directory or wrong path directory.")
+        print("There has been an error with the currentDir variable.")
 
 def main():
     currentDirectory()

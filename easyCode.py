@@ -1,13 +1,13 @@
 import customtkinter as ctk
 import tkinter as tk
 from PIL import Image
+import os
 
 python = "pythonCodingFile.txt"
 score = "rightandwrong.txt"
 pythonCodeLines = []
 pyhtonExample = ""
 timer = 31
-
 
 
 # Load Python Code Lines & Return the string
@@ -27,21 +27,11 @@ def newPython():
 
 def easyFrame(root):
 
-    timerFont = ctk.CTkFont(family="Inter", 
-                    size=24,
-                    weight="bold", # weight bold/normal
-                    slant="roman", # slant roman/italic
-                    )
+    currentDir = os.getcwd()
     
     codingFont = ctk.CTkFont(family="JetBrains Mono NL", 
                     size=16, 
                     weight="normal", # weight bold/normal
-                    slant="roman", # slant roman/italic
-                    )
-    
-    header = ctk.CTkFont(family="Inter", 
-                    size=48, 
-                    weight="bold", # weight bold/normal
                     slant="roman", # slant roman/italic
                     )
 
@@ -145,7 +135,7 @@ def easyFrame(root):
     circleTwo = ctk.CTkFrame(windowFrame, fg_color="#424242", width=13, height=13, corner_radius=18)
     circleThree = ctk.CTkFrame(windowFrame, fg_color="#595959", width=13, height=13, corner_radius=18)
     timerLabel = ctk.CTkLabel(windowFrame, text="30", text_color="#636363", font=("Inter 24pt", 16))
-    timerImage = ctk.CTkImage(light_image=Image.open("/Users/paycheckbelfast/workspace/vscode/workspace/ctkprojects/typingtest/elements/timer.png"), dark_image=Image.open("/Users/paycheckbelfast/workspace/vscode/workspace/ctkprojects/typingtest/elements/timer.png"), size=(17, 17))
+    timerImage = ctk.CTkImage(light_image=Image.open(f"{currentDir}/elements/timer.png"), dark_image=Image.open(f"{currentDir}/elements/timer.png"), size=(17, 17))
     timerLogo = ctk.CTkLabel(windowFrame, text="", image=timerImage)
 
 
