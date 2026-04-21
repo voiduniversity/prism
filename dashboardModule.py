@@ -6,10 +6,10 @@ import os
 
 from PIL import Image
 
-score = "rightandwrong.txt"
+easyScore = "easyScore.txt"
 userScore = 0
 
-
+elapsed = "elapsedTime.txt"
  
 def dashboardFrame(root, python):
 
@@ -18,8 +18,10 @@ def dashboardFrame(root, python):
 
         while True:
             time.sleep(0.1)
+            with open(elapsed) as timeTaken:
+                currentTime = int(timeTaken.readline().strip()) / 60
             print("Threading works")
-            with open(score) as scoreFile:
+            with open(easyScore) as scoreFile:
                 userScore = scoreFile.read()
 
                 if userScore != "":
@@ -33,7 +35,7 @@ def dashboardFrame(root, python):
                     accuracyCalc = (int(scoreList[0]) / len(python)) * 100
                     accuracy.configure(text=f"{int(accuracyCalc)}%")
 
-                    wpm = ((int(scoreList[0]) + int(scoreList[1])) / 5) * 2
+                    wpm = ((int(scoreList[0]) + int(scoreList[1])) / 5) / currentTime
                     wordsPerMinute.configure(text=f"{int(wpm)}wpm")
 
                 else:

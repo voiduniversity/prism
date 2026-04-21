@@ -4,21 +4,26 @@ from PIL import Image
 import os
 
 python = "pythonEasyFile.txt"
-score = "rightandwrong.txt"
+score = "easyScore.txt"
 pythonCodeLines = []
 pyhtonExample = ""
 timer = 31
+elapsed = 0
+elapsedTime = "elapsedTime.txt"
 
 
 # Load Python Code Lines & Return the string
-def newPython():
+def easyPython():
     global pythonExample
 
     with open(python) as pythonFile:
         for line in pythonFile:
+            # Append each line to a list & join them together
             pythonCodeLines.append(line.strip())
             exampleJoined = "".join(pythonCodeLines)
-            splitExample = exampleJoined.split(" ")
+
+            # Get rid of additional whitespaces between words
+            splitExample = exampleJoined.split()
             example = "".join(splitExample)
 
             pythonExample = example
@@ -44,11 +49,11 @@ def easyFrame(root):
     IDEnums = "\n".join(codeNums)
 
     # Submit the code -> Saves the users coåde with no whitelines or spaces
-    # then gets saved locally within rightandwrong.txt
+    # then gets saved locally within easyScore.txt
     def submitCode():
         global timer
         timer = 0
-        timerLabel.configure(text=30)
+        timerLabel.configure(text=60)
         userFrame.configure(state="disabled")
         submitButton.configure(state="disabled")
         startButton.configure(state="normmal")
@@ -99,14 +104,19 @@ def easyFrame(root):
         with open(score, "w") as scoreFile:
             print("Debugging: Executed")
             scoreFile.write(f"{rightChars}|{wrongChars}")
+        
+        with open(elapsedTime, "w") as timeTaken:
+            print("Debugging: Executed")
+            timeTaken.write(str(elapsed))
 
     def timerFunc():
-        global timer
+        global timer, elapsed
         userFrame.configure(state="normal")
         startButton.configure(state="disabled")
         submitButton.configure(state="normal")
 
         if timer != 0:
+            elapsed += 1
             timer -=1
             timerLabel.configure(text=timer)
             root.after(1000, timerFunc)
@@ -114,8 +124,9 @@ def easyFrame(root):
             submitCode()
 
     def resetTimer():
-        global timer
+        global timer, elapsed
         timer = 61
+        elapsed = 0
         timerFunc()
             
 
@@ -140,8 +151,10 @@ def easyFrame(root):
 
 
     languageType = ctk.CTkLabel(windowFrame, text="python", text_color="#636363", font=("Inter 24pt", 16))
-    startButton = ctk.CTkButton(windowFrame, text="start", font=("Inter 24pt", 14), text_color="#F2F2F2", text_color_disabled="#636363", fg_color="#121212", hover_color="#121212", width=82, height=22, border_width=1, border_color="#636363", corner_radius=29, command=resetTimer)
-    submitButton = ctk.CTkButton(windowFrame, text="submit", font=("Inter 24pt", 14), text_color="#F2F2F2", text_color_disabled="#636363", fg_color="#121212", hover_color="#121212", width=82, height=22, border_width=1, border_color="#636363", corner_radius=29, state="disabled", command=submitCode)
+    startImage = ctk.CTkImage(light_image=Image.open(f"{currentDir}/elements/start.png"), dark_image=Image.open(f"{currentDir}/elements/start.png"), size=(15, 15))
+    startButton = ctk.CTkButton(windowFrame, text="", image=startImage, text_color="#F2F2F2", text_color_disabled="#636363", fg_color="#121212", hover_color="#121212", width=82, height=22, border_width=1, border_color="#636363", corner_radius=29, command=resetTimer)
+    submitImage = ctk.CTkImage(light_image=Image.open(f"{currentDir}/elements/submit.png"), dark_image=Image.open(f"{currentDir}/elements/submit.png"), size=(15, 15))
+    submitButton = ctk.CTkButton(windowFrame, text="", image=submitImage, text_color="#F2F2F2", text_color_disabled="#636363", fg_color="#121212", hover_color="#121212", width=82, height=22, border_width=1, border_color="#636363", corner_radius=29, state="disabled", command=submitCode)
 
     # Hard coded label output
     lineOne = ctk.CTkLabel(codeFrame, text=pythonCodeLines[0], font=codingFont, text_color="#636363")

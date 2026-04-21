@@ -11,13 +11,16 @@ timer = 31
 
 
 # Load Python Code Lines & Return the string
-def newPython():
+def mediumPython():
     global pythonExample
 
     with open(python) as pythonFile:
         for line in pythonFile:
+            # Append each line to a list & join them together
             pythonCodeLines.append(line.strip())
             exampleJoined = "".join(pythonCodeLines)
+            
+            # Get rid of additional whitespaces between words
             splitExample = exampleJoined.split(" ")
             example = "".join(splitExample)
 
@@ -38,7 +41,7 @@ def mediumFrame(root):
     # Loop - > codeNums will have 15 numbers individually that will be used to
     # output the numbers on new lines to represent an IDE look
     codeNums = []
-    for num in range(16):
+    for num in range(18):
         codeNums.append(str(num + 1))
 
     IDEnums = "\n".join(codeNums)
@@ -140,8 +143,10 @@ def mediumFrame(root):
 
 
     languageType = ctk.CTkLabel(windowFrame, text="python", text_color="#636363", font=("Inter 24pt", 16))
-    startButton = ctk.CTkButton(windowFrame, text="start", font=("Inter 24pt", 14), text_color="#F2F2F2", text_color_disabled="#636363", fg_color="#121212", hover_color="#121212", width=82, height=22, border_width=1, border_color="#636363", corner_radius=29, command=resetTimer)
-    submitButton = ctk.CTkButton(windowFrame, text="submit", font=("Inter 24pt", 14), text_color="#F2F2F2", text_color_disabled="#636363", fg_color="#121212", hover_color="#121212", width=82, height=22, border_width=1, border_color="#636363", corner_radius=29, state="disabled", command=submitCode)
+    startImage = ctk.CTkImage(light_image=Image.open(f"{currentDir}/elements/start.png"), dark_image=Image.open(f"{currentDir}/elements/start.png"), size=(15, 15))
+    startButton = ctk.CTkButton(windowFrame, text="", image=startImage, text_color="#F2F2F2", text_color_disabled="#636363", fg_color="#121212", hover_color="#121212", width=82, height=22, border_width=1, border_color="#636363", corner_radius=29, command=resetTimer)
+    submitImage = ctk.CTkImage(light_image=Image.open(f"{currentDir}/elements/submit.png"), dark_image=Image.open(f"{currentDir}/elements/submit.png"), size=(15, 15))
+    submitButton = ctk.CTkButton(windowFrame, text="", image=submitImage, text_color="#F2F2F2", text_color_disabled="#636363", fg_color="#121212", hover_color="#121212", width=82, height=22, border_width=1, border_color="#636363", corner_radius=29, state="disabled", command=submitCode)
 
     # Hard coded label output
     lineOne = ctk.CTkLabel(codeFrame, text=pythonCodeLines[0], font=codingFont, text_color="#636363")
@@ -151,6 +156,13 @@ def mediumFrame(root):
     lineFive = ctk.CTkLabel(codeFrame, text=pythonCodeLines[4], font=codingFont, text_color="#636363")
     lineSix = ctk.CTkLabel(codeFrame, text=pythonCodeLines[5], font=codingFont, text_color="#636363")
     lineSeven = ctk.CTkLabel(codeFrame, text=pythonCodeLines[6], font=codingFont, text_color="#636363")
+    lineEight = ctk.CTkLabel(codeFrame, text=pythonCodeLines[7], font=codingFont, text_color="#636363")
+    lineNine = ctk.CTkLabel(codeFrame, text=pythonCodeLines[8], font=codingFont, text_color="#636363")
+    lineTen = ctk.CTkLabel(codeFrame, text=pythonCodeLines[9], font=codingFont, text_color="#636363")
+    lineEleven = ctk.CTkLabel(codeFrame, text=pythonCodeLines[10], font=codingFont, text_color="#636363")
+    lineTwelve = ctk.CTkLabel(codeFrame, text=pythonCodeLines[11], font=codingFont, text_color="#636363")
+    lineThirteen = ctk.CTkLabel(codeFrame, text=pythonCodeLines[12], font=codingFont, text_color="#636363")
+    lineFourteen = ctk.CTkLabel(codeFrame, text=pythonCodeLines[13], font=codingFont, text_color="#636363")
 
 
     # Positioning - Window Frame
@@ -167,14 +179,21 @@ def mediumFrame(root):
     # Code Frame
     codeFrame.place(x=37, y=46)
     ideFrameOne.place(x=0, y=46)
-    numsOne.place(x=11, y=7)
+    numsOne.place(x=9, y=7)
     lineOne.place(x=9, y=3)
-    lineTwo.place(x=25, y=23)
-    lineThree.place(x=25, y=65)
-    lineFour.place(x=41, y=85)
-    lineFive.place(x=9, y=130)
-    lineSix.place(x=25, y=150)
-    lineSeven.place(x=11, y=172)
+    lineTwo.place(x=9, y=25)
+    lineThree.place(x=25, y=45)
+    lineFour.place(x=25, y=67)
+    lineFive.place(x=25, y=87)
+    lineSix.place(x=25, y=129)
+    lineSeven.place(x=41, y=149)
+    lineEight.place(x=41, y=172)
+    lineNine.place(x=58, y=192)
+    lineTen.place(x=41, y=212)
+    lineEleven.place(x=58, y=232)
+    lineTwelve.place(x=25, y=276)
+    lineThirteen.place(x=41, y=296)
+    lineFourteen.place(x=25, y=338)
 
     # User Code
     userFrame.place(x=601, y=46)

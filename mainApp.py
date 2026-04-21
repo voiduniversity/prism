@@ -2,18 +2,18 @@
 import customtkinter as ctk
 import tkinter as tk
 import os
-import time
 
 from PIL import Image
 
 # Import Modules // Frames
 from dashboardModule import dashboardFrame
-from easyCode import easyFrame, newPython
+from easyCode import easyFrame, easyPython
+from mediumCode import mediumFrame, mediumPython
 
 appearance = "light" # Default
 
 user = "username.txt"
-score = "rightandwrong.txt"
+elapsed = "elapsedTime.txt"
 
 username = "unknown"
 
@@ -123,9 +123,11 @@ def codeType():
 
 
     # Frames // Imported from different modules
-    python = newPython() # Int -> length of chars in python coding
-    dashboard = dashboardFrame(root, python) # Frame -> root (mainApp), python (Int)
+    ePython = easyPython() # Int -> length of chars in easy python coding
+    mPython = mediumPython()
+    dashboard = dashboardFrame(root, ePython) # Frame -> root (mainApp), python (Int)
     easy = easyFrame(root) # Frame -> root (mainApp)
+    medium = mediumFrame(root) # Frame -> root (mainApp)
 
 
 
@@ -143,6 +145,7 @@ def codeType():
 
         # Get rid of current frame
         easy.place(y=721)
+        medium.place(y=721)
     
     def easyMenu():
         # Place new frame
@@ -150,6 +153,15 @@ def codeType():
 
         # Get rid of current frame
         dashboard.place(y=721)
+        medium.place(y=721)
+
+    def mediumMenu():
+        # Place new frame
+        medium.place(y=0)
+
+        # Get rid of current frame
+        dashboard.place(y=721)
+        easy.place(y=721)
 
 
     # Text Labels
@@ -169,7 +181,7 @@ def codeType():
 
     easyButton = ctk.CTkButton(menuFrame, text="", image=easyIcon, fg_color="#121212", hover_color="#121212", width=42, height=42, border_width=1, border_color="#636363", corner_radius=10, command=easyMenu)
 
-    mediumButton = ctk.CTkButton(menuFrame, text="", image=easyIcon, fg_color="#121212", hover_color="#121212", width=42, height=42, border_width=1, border_color="#636363", corner_radius=10, command=None)
+    mediumButton = ctk.CTkButton(menuFrame, text="", image=easyIcon, fg_color="#121212", hover_color="#121212", width=42, height=42, border_width=1, border_color="#636363", corner_radius=10, command=mediumMenu)
 
     hardButton = ctk.CTkButton(menuFrame, text="", image=easyIcon, fg_color="#121212", hover_color="#121212", width=42, height=42, border_width=1, border_color="#636363", corner_radius=10, command=None)
 
@@ -209,6 +221,7 @@ def codeType():
 
 
     easy.place(x=0, y=721)
+    medium.place(x=0, y=721)
 
     root.mainloop()
 

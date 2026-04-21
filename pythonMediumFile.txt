@@ -9,9 +9,6 @@ if char in badChars:
 continue
 else:
 newString = newString + char
-if count == len(string) and count == len(newString):
+if count==len(string) and count==len(newString):
 isClear = True
 return newString, isClear
-def main():
-print(stringChecker("what!"))
-main()
