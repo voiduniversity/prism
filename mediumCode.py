@@ -3,7 +3,7 @@ import tkinter as tk
 from PIL import Image
 import os
 
-python = "pythonEasyFile.txt"
+python = "pythonMediumFile.txt"
 score = "rightandwrong.txt"
 pythonCodeLines = []
 pyhtonExample = ""
@@ -25,7 +25,7 @@ def newPython():
     
     return example
 
-def easyFrame(root):
+def mediumFrame(root):
 
     currentDir = os.getcwd()
     
@@ -38,7 +38,7 @@ def easyFrame(root):
     # Loop - > codeNums will have 15 numbers individually that will be used to
     # output the numbers on new lines to represent an IDE look
     codeNums = []
-    for num in range(18):
+    for num in range(16):
         codeNums.append(str(num + 1))
 
     IDEnums = "\n".join(codeNums)

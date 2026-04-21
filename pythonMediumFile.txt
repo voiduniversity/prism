@@ -1,0 +1,17 @@
+badChars = ["!", "?", ",", ".", "#"]
+def stringChecker(string):
+newString = ""
+isClear = False
+count = 0
+for char in string:
+count += 1
+if char in badChars:
+continue
+else:
+newString = newString + char
+if count == len(string) and count == len(newString):
+isClear = True
+return newString, isClear
+def main():
+print(stringChecker("what!"))
+main()
