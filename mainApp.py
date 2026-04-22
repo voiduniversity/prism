@@ -25,7 +25,6 @@ def codeType():
 
     root = ctk.CTk()
     root.title("prism // @voiduniversity")
-    root.iconbitmap(f"{currentDir}/elements/icon.ico")
 
     # codeType width x height
     rootWidth = 1280
