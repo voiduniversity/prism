@@ -122,8 +122,8 @@ def codeType():
 
 
     # Frames // Imported from different modules
-    ePython = easyPython() # Int -> length of chars in easy python coding
-    mPython = mediumPython()
+    easyPython() # Int -> length of chars in easy python coding
+    mediumPython()
     dashboard = dashboardFrame(root) # Frame -> root (mainApp)
     easy = easyFrame(root) # Frame -> root (mainApp)
     medium = mediumFrame(root) # Frame -> root (mainApp)
