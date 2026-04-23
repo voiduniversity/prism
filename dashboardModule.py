@@ -14,6 +14,8 @@ userScore = 0
 elapsed = f"{currentDir}/dependencies/elapsedTime.txt"
 
 totalLength = f"{currentDir}/dependencies/counted.txt"
+
+diff = f"{currentDir}/dependencies/recentDifficulty.txt"
  
 def dashboardFrame(root):
 
@@ -22,17 +24,31 @@ def dashboardFrame(root):
 
         while True:
             time.sleep(0.1)
+
+            print("Threading works")
+
             with open(elapsed) as timeTaken:
                 try:
                     currentTime = int(timeTaken.readline().strip()) / 60
                 except:
                     currentTime = 0
-            print("Threading works")
+    
             with open(easyScore) as scoreFile:
                 userScore = scoreFile.read()
 
             with open(totalLength) as total:
                 length = total.readline()
+
+            with open(diff) as currentDiff:
+                difficulty = currentDiff.readline().strip()
+
+            if difficulty != "":
+                if difficulty == "Easy":
+                    wrongDesc.configure(text=f"{difficulty}")
+                    wrongDesc.place(x=252, y=36)
+                elif difficulty == "Medium":
+                    wrongDesc.configure(text=f"{difficulty}")
+                    wrongDesc.place(x=226, y=36)
 
             if userScore != "":
                 if int(userScore) != int(length):

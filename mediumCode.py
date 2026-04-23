@@ -5,15 +5,15 @@ import os
 
 currentDir = os.getcwd()
 
-python = "pythonMediumFile.txt"
-score = "rightandwrong.txt"
+python = f"{currentDir}/dependencies/pythonMediumFile.txt"
+score = f"{currentDir}/dependencies/scoring.txt"
 pythonCodeLines = []
 pyhtonExample = ""
 timer = 61
 elapsed = 0
 elapsedTime = f"{currentDir}/dependencies/elapsedTime.txt"
-
 codecount = f"{currentDir}/dependencies/counted.txt"
+diff = f"{currentDir}/dependencies/recentDifficulty.txt"
 
 # Load Python Code Lines & Return the string
 def mediumPython():
@@ -104,6 +104,9 @@ def mediumFrame(root):
         with open(elapsedTime, "w") as timeTaken:
             print("Debugging: Executed")
             timeTaken.write(str(elapsed))
+        
+        with open(diff, "w") as diffiulty:
+            diffiulty.write("Medium")
 
         with open(codecount, "w") as counting:
             counting.write(str(len(pythonExample)))

@@ -12,8 +12,8 @@ pyhtonExample = ""
 timer = 61
 elapsed = 0
 elapsedTime = f"{currentDir}/dependencies/elapsedTime.txt"
-
 codecount = f"{currentDir}/dependencies/counted.txt"
+diff = f"{currentDir}/dependencies/recentDifficulty.txt"
 
 
 # Load Python Code Lines & Return the string
@@ -104,6 +104,9 @@ def easyFrame(root):
         with open(elapsedTime, "w") as timeTaken:
             print("Debugging: Executed")
             timeTaken.write(str(elapsed))
+        
+        with open(diff, "w") as diffiulty:
+            diffiulty.write("Easy")
 
         with open(codecount, "w") as counting:
             counting.write(str(len(pythonExample)))
