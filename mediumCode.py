@@ -3,12 +3,17 @@ import tkinter as tk
 from PIL import Image
 import os
 
+currentDir = os.getcwd()
+
 python = "pythonMediumFile.txt"
 score = "rightandwrong.txt"
 pythonCodeLines = []
 pyhtonExample = ""
-timer = 31
+timer = 61
+elapsed = 0
+elapsedTime = f"{currentDir}/dependencies/elapsedTime.txt"
 
+codecount = f"{currentDir}/dependencies/counted.txt"
 
 # Load Python Code Lines & Return the string
 def mediumPython():
@@ -26,11 +31,8 @@ def mediumPython():
 
             pythonExample = example
     
-    return example
 
 def mediumFrame(root):
-
-    currentDir = os.getcwd()
     
     codingFont = ctk.CTkFont(family="JetBrains Mono NL", 
                     size=16, 
@@ -67,7 +69,6 @@ def mediumFrame(root):
         # Track right & wrong with the help of claude
         i = 0
         j = 0
-        wrongChars = 0
         rightChars = 0
         userInput = list(final)
         codingExample = list(pythonExample)
@@ -82,17 +83,14 @@ def mediumFrame(root):
             else:
                 # Inserion // if i+1 is not the last char and i+1 is the same as j's current index
                 if i + 1 < len(userInput) and userInput[i + 1] == codingExample[j]:
-                    wrongChars += 1
                     i += 1
                     continue
                 # Deletion // if j+1 is not the last char and j+1 is the same as i's current index
                 elif j + 1 < len(codingExample) and userInput[i] == codingExample[j + 1]:
-                    wrongChars += 1
                     j += 1
                     continue
                 # Subtitution // if user missed a character
                 else:
-                    wrongChars += 1
                     i += 1
                     j += 1
                     continue
@@ -101,15 +99,23 @@ def mediumFrame(root):
         
         with open(score, "w") as scoreFile:
             print("Debugging: Executed")
-            scoreFile.write(f"{rightChars}|{wrongChars}")
+            scoreFile.write(f"{rightChars}")
+
+        with open(elapsedTime, "w") as timeTaken:
+            print("Debugging: Executed")
+            timeTaken.write(str(elapsed))
+
+        with open(codecount, "w") as counting:
+            counting.write(str(len(pythonExample)))
 
     def timerFunc():
-        global timer
+        global timer, elapsed
         userFrame.configure(state="normal")
         startButton.configure(state="disabled")
         submitButton.configure(state="normal")
 
         if timer != 0:
+            elapsed += 1
             timer -=1
             timerLabel.configure(text=timer)
             root.after(1000, timerFunc)
@@ -119,6 +125,7 @@ def mediumFrame(root):
     def resetTimer():
         global timer
         timer = 61
+        elapsed = 0
         timerFunc()
             
 

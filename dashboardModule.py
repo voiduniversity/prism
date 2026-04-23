@@ -6,12 +6,16 @@ import os
 
 from PIL import Image
 
-easyScore = "easyScore.txt"
+currentDir = os.getcwd()
+
+easyScore = f"{currentDir}/dependencies/scoring.txt"
 userScore = 0
 
-elapsed = "elapsedTime.txt"
+elapsed = f"{currentDir}/dependencies/elapsedTime.txt"
+
+totalLength = f"{currentDir}/dependencies/counted.txt"
  
-def dashboardFrame(root, python):
+def dashboardFrame(root):
 
     def watchScoreFile():
         global userScore
@@ -19,36 +23,39 @@ def dashboardFrame(root, python):
         while True:
             time.sleep(0.1)
             with open(elapsed) as timeTaken:
-                currentTime = int(timeTaken.readline().strip()) / 60
+                try:
+                    currentTime = int(timeTaken.readline().strip()) / 60
+                except:
+                    currentTime = 0
             print("Threading works")
             with open(easyScore) as scoreFile:
                 userScore = scoreFile.read()
 
-                if userScore != "":
-                    scoreList = userScore.split("|")
-                    if int(scoreList[0]) != 100 and int(scoreList[1]) == 0:
-                        wrong = len(python) - int(scoreList[0]) 
-                        counting.configure(text=f"{scoreList[0]}/{wrong}")
-                    else:
-                        counting.configure(text=f"{scoreList[0]}/{scoreList[1]}")
+            with open(totalLength) as total:
+                length = total.readline()
 
-                    accuracyCalc = (int(scoreList[0]) / len(python)) * 100
-                    accuracy.configure(text=f"{int(accuracyCalc)}%")
-
-                    wpm = ((int(scoreList[0]) + int(scoreList[1])) / 5) / currentTime
-                    wordsPerMinute.configure(text=f"{int(wpm)}wpm")
-
+            if userScore != "":
+                if int(userScore) != int(length):
+                    wrong = int(length) - int(userScore) 
+                    counting.configure(text=f"{userScore}/{wrong}")
                 else:
-                    counting.configure(text="0/0")
-                    accuracy.configure(text=f"0%")
-                    wordsPerMinute.configure(text="0wpm")
+                    counting.configure(text=f"{userScore}/0")
+
+                accuracyCalc = (int(userScore) / int(length)) * 100
+                accuracy.configure(text=f"{int(accuracyCalc)}%")
+
+                wpm = ((int(userScore) + int(wrong)) / 5) / currentTime
+                wordsPerMinute.configure(text=f"{int(wpm)}wpm")
+
+            else:
+                counting.configure(text="0/0")
+                accuracy.configure(text=f"0%")
+                wordsPerMinute.configure(text="0wpm")
 
                 
     
     watchScore = threading.Thread(target=watchScoreFile, daemon=True)
     watchScore.start()
-
-    currentDir = os.getcwd()
 
 
     widgetFont = ctk.CTkFont(family="Inter 24pt", 
