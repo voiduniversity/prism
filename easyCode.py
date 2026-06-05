@@ -182,7 +182,7 @@ def easyFrame(root):
     # Code Frame
     codeFrame.place(x=37, y=46)
     ideFrameOne.place(x=0, y=46)
-    numsOne.place(x=11, y=7)
+    numsOne.place(x=9, y=7)
     lineOne.place(x=9, y=3)
     lineTwo.place(x=25, y=23)
     lineThree.place(x=25, y=65)

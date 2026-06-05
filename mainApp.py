@@ -77,6 +77,10 @@ def codeType():
                             size=16,
                             slant="roman", # slant roman/italic
                             )
+    
+    geist16px = ctk.CTkFont(family="Geist Mono",
+                            size=16,
+                            slant="roman")
 
     # Top Level Window // Finished
     with open(user) as usernameFile:
@@ -131,56 +135,86 @@ def codeType():
     def dashboardMenu():
         # Place new frame
         dashboard.place(y=0)
+        diffFrame.place(y=480)
 
         # Get rid of current frame
         easy.place(y=721)
         medium.place(y=721)
+        returnFrame.place(y=721)
     
     def easyMenu():
         # Place new frame
         easy.place(y=0)
+        returnFrame.place(y=655)
 
         # Get rid of current frame
         dashboard.place(y=721)
         medium.place(y=721)
+        diffFrame.place(y=721)
 
     def mediumMenu():
         # Place new frame
         medium.place(y=0)
+        returnFrame.place(y=655)
 
         # Get rid of current frame
         dashboard.place(y=721)
         easy.place(y=721)
+        diffFrame.place(y=721)
 
     # Text Labels
     logo = ctk.CTkLabel(root, text="prism", font=logoFont, text_color="#F2F2F2")
 
-    # Menu & Buttons
+    """ Menu & Buttons
     menuFrame = ctk.CTkFrame(root, fg_color="#121212", width=355, height=65, border_color="#636363", border_width=1, corner_radius=20)
     dashboardButton = ctk.CTkButton(menuFrame, text="", image=dashboardIcon, fg_color="#121212", hover_color="#121212", width=42, height=42, border_width=1, border_color="#636363", corner_radius=10, command=dashboardMenu)
     easyButton = ctk.CTkButton(menuFrame, text="", image=easyIcon, fg_color="#121212", hover_color="#121212", width=42, height=42, border_width=1, border_color="#636363", corner_radius=10, command=easyMenu)
     mediumButton = ctk.CTkButton(menuFrame, text="", image=easyIcon, fg_color="#121212", hover_color="#121212", width=42, height=42, border_width=1, border_color="#636363", corner_radius=10, command=mediumMenu)
     hardButton = ctk.CTkButton(menuFrame, text="", image=easyIcon, fg_color="#121212", hover_color="#121212", width=42, height=42, border_width=1, border_color="#636363", corner_radius=10, command=None)
     creditsButton = ctk.CTkButton(menuFrame, text="", image=infoIcon, fg_color="#121212", hover_color="#121212", width=42, height=42, border_width=1, border_color="#636363", corner_radius=10, command=None)
-
+    """
+    
     # Welcome Message inside dashboard
     usernameText = ctk.CTkLabel(root, text=f"@{username}", font=usernameFont, text_color="#FFFFFF")
 
-    # positioning - menu
+    # Pick difficulty
+    diffFrame = ctk.CTkFrame(root, fg_color="#121212", width=450, height=141)
+    pickLabel = ctk.CTkLabel(diffFrame, text="Pick a Mode:", text_color="#535353", font=geist16px)
+    easyButton = ctk.CTkButton(diffFrame, width=116, height=31, text="Easy", text_color="#000000", fg_color="#FFFFFF", bg_color="#000000", hover_color="#DCDCDC", corner_radius=50, font=geist16px, command=easyMenu)
+    mediumButton = ctk.CTkButton(diffFrame, width=116, height=31, text="Medium", text_color="#000000", fg_color="#FFFFFF", bg_color="#000000", hover_color="#DCDCDC", corner_radius=50, font=geist16px, command=mediumMenu)
+    hardButton = ctk.CTkButton(diffFrame, width=116, height=31, text="Hard", text_color="#000000", fg_color="#FFFFFF", bg_color="#000000", hover_color="#DCDCDC", corner_radius=50, font=geist16px, command=None)
+
+    # Return to dashboard
+    returnFrame = ctk.CTkFrame(root, fg_color="#121212", width=178, height=50)
+    returnButton = ctk.CTkButton(returnFrame, width=116, height=31, text="Return", text_color="#000000", fg_color="#FFFFFF", bg_color="#000000", hover_color="#DCDCDC", corner_radius=50, font=geist16px, command=dashboardMenu)
+
+    """ positioning - menu
     menuFrame.place(x=462, y=623)
     dashboardButton.place(x=25 , y=11)
     easyButton.place(x=91, y=11)
     mediumButton.place(x=157, y=11)
     hardButton.place(x=223, y=11)
     creditsButton.place(x=289, y=11)
+    """
 
     # positioning dashboard - main & extra elements
     dashboard.place(x=0, y=0)
     usernameText.place(x=132, y=30)
 
+    # difficulty positioning
+    diffFrame.place(x=415, y=480)
+    pickLabel.place(x=167, y=33)
+    easyButton.place(x=40, y=66)
+    mediumButton.place(x=167, y=66)
+    hardButton.place(x=294, y=66)
+
+    returnFrame.place(x=1089, y=721)
+    returnButton.place(x=31, y=10)
+
     # positioning - labels
     logo.place(x=37, y=20)
 
+    # positioning frames - difficulty frames
     easy.place(x=0, y=721)
     medium.place(x=0, y=721)
 
