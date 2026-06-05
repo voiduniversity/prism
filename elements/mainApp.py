@@ -50,9 +50,8 @@ def codeType():
     root.resizable(width = False, height = False) # Disable user scaling
 
     # Fonts // Same font, different sizes
-    logoFont = ctk.CTkFont(family="Instrument Serif", 
+    logoFont = ctk.CTkFont(family="Inter 24pt", 
                         size=40,
-                        weight="normal",
                         slant="roman", # slant roman/italic
                         )
         
@@ -69,7 +68,6 @@ def codeType():
         
     usernameFont = ctk.CTkFont(family="Instrument Serif", 
                             size=24,
-                            weight="normal",
                             slant="roman", # slant roman/italic
                             )
         
@@ -154,6 +152,8 @@ def codeType():
 
     # Text Labels
     logo = ctk.CTkLabel(root, text="prism", font=logoFont, text_color="#F2F2F2")
+    plusElement = ctk.CTkLabel(root, text="+", font=logoFont, text_color="#F2F2F2")
+    universityLabel = ctk.CTkLabel(root, text="university", font=elementFont, text_color="#F2F2F2")
 
     # Menu & Buttons
     menuFrame = ctk.CTkFrame(root, fg_color="#121212", width=355, height=65, border_color="#636363", border_width=1, corner_radius=20)
@@ -164,7 +164,10 @@ def codeType():
     creditsButton = ctk.CTkButton(menuFrame, text="", image=infoIcon, fg_color="#121212", hover_color="#121212", width=42, height=42, border_width=1, border_color="#636363", corner_radius=10, command=None)
 
     # Welcome Message inside dashboard
-    usernameText = ctk.CTkLabel(root, text=f"@{username}", font=usernameFont, text_color="#FFFFFF")
+    bluebar = ctk.CTkFrame(dashboard, fg_color="#6B8CE6", width=6, height=59)
+    welcomeMessage = ctk.CTkLabel(dashboard, text=f"Welcome,", font=welcomeFont, text_color="#F2F2F2")
+    usernameText = ctk.CTkLabel(dashboard, text=f"{username}!", font=usernameFont)
+    subHeading = ctk.CTkLabel(dashboard, text="Here's your current performance", font=welcomeSubHeading, text_color="#484848")
 
     # positioning - menu
     menuFrame.place(x=462, y=623)
@@ -176,10 +179,15 @@ def codeType():
 
     # positioning dashboard - main & extra elements
     dashboard.place(x=0, y=0)
-    usernameText.place(x=132, y=30)
+    bluebar.place(x=53, y=82)
+    welcomeMessage.place(x=67, y=88)
+    usernameText.place(x=192, y=88)
+    subHeading.place(x=69, y=114)
 
     # positioning - labels
     logo.place(x=37, y=20)
+    plusElement.place(x=1214, y=22)
+    universityLabel.place(x=44, y=632)
 
     easy.place(x=0, y=721)
     medium.place(x=0, y=721)

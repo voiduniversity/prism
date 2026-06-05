@@ -43,12 +43,7 @@ def dashboardFrame(root):
                 difficulty = currentDiff.readline().strip()
 
             if difficulty != "":
-                if difficulty == "Easy":
-                    wrongDesc.configure(text=f"{difficulty}")
-                    wrongDesc.place(x=252, y=36)
-                elif difficulty == "Medium":
-                    wrongDesc.configure(text=f"{difficulty}")
-                    wrongDesc.place(x=226, y=36)
+                difficultyText.configure(text=f"{difficulty}")
 
             if userScore != "":
                 if int(userScore) != int(length):
@@ -61,7 +56,14 @@ def dashboardFrame(root):
                 accuracy.configure(text=f"{int(accuracyCalc)}%")
 
                 wpm = ((int(userScore) + int(wrong)) / 5) / currentTime
-                wordsPerMinute.configure(text=f"{int(wpm)}wpm")
+                wordsPerMinute.configure(text=f"{int(wpm)}")
+
+                if int(wpm) >= 0 and int(wpm) < 10:
+                    wpmLittle.place(x=55, y=190)
+                elif int(wpm) > 10 and int(wpm) < 100:
+                    wpmLittle.place(x=94, y=190)
+                else:
+                    wpmLittle.place(x=131, y=190)
 
             else:
                 counting.configure(text="0/0")
@@ -72,6 +74,18 @@ def dashboardFrame(root):
     
     watchScore = threading.Thread(target=watchScoreFile, daemon=True)
     watchScore.start()
+
+    geist12px = ctk.CTkFont(family="Geist Mono",
+                            size=12,
+                            slant="roman")
+    
+    geist16px = ctk.CTkFont(family="Geist Mono",
+                            size=16,
+                            slant="roman")
+    
+    geist65px = ctk.CTkFont(family="Geist Mono",
+                            size=65,
+                            slant="roman")
 
 
     widgetFont = ctk.CTkFont(family="Inter 24pt", 
@@ -91,45 +105,67 @@ def dashboardFrame(root):
     missedImage = ctk.CTkImage(light_image=Image.open(f"{currentDir}/elements/dangerous.png"), dark_image=Image.open(f"{currentDir}/elements/dangerous.png"), size=(23, 23))
     accuracyImage = ctk.CTkImage(light_image=Image.open(f"{currentDir}/elements/accuracy.png"), dark_image=Image.open(f"{currentDir}/elements/accuracy.png"), size=(23, 23))
     wpmImage = ctk.CTkImage(light_image=Image.open(f"{currentDir}/elements/keyboard.png"), dark_image=Image.open(f"{currentDir}/elements/keyboard.png"), size=(23, 23))
+    commitImage = ctk.CTkImage(light_image=Image.open(f"{currentDir}/elements/commit.png"), dark_image=Image.open(f"{currentDir}/elements/commit.png"), size=(23, 23))
+
+    # Last Difficulty
+    lastDiff = ctk.CTkLabel(root, text="Last Difficulty:", text_color="#535353", font=geist12px)
+    difficultyText = ctk.CTkLabel(root, text="None", text_color="#FFFFFF", font=geist12px)
 
     # Apeparance // Frames
-    widget1 = ctk.CTkFrame(dashboard, fg_color="#121212", border_width=1, border_color="#636363", width=308, height=177, corner_radius=29)
-    widget2 = ctk.CTkFrame(dashboard, fg_color="#121212", border_width=1, border_color="#636363", width=308, height=177, corner_radius=29)
-    widget3 = ctk.CTkFrame(dashboard, fg_color="#121212", border_width=1, border_color="#636363", width=308, height=177, corner_radius=29)
-    leaderboardwidget = ctk.CTkFrame(dashboard, fg_color="#121212", border_width=1, border_color="#636363", width=308, height=177, corner_radius=29)
+    widget1 = ctk.CTkFrame(dashboard, fg_color="#232323", width=224, height=224, corner_radius=12)
+    widget2 = ctk.CTkFrame(dashboard, fg_color="#232323", width=224, height=224, corner_radius=12)
+    widget3 = ctk.CTkFrame(dashboard, fg_color="#232323", width=224, height=224, corner_radius=12)
+    widget4 = ctk.CTkFrame(dashboard, fg_color="#232323", width=224, height=224, corner_radius=12)
 
     # Widget1 Elements
-    wrongText = ctk.CTkLabel(widget1, text="Missed Characters", text_color="#F2F2F2", font=widgetFont)
-    wrongDesc = ctk.CTkLabel(widget1, text="R/W", text_color="#F2F2F2", font=widgetFont)
-    counting = ctk.CTkLabel(widget1, text="", text_color="#F2F2F2", font=widgetFont2)
-    wrongLabel = ctk.CTkLabel(widget1, text="", image=missedImage)
+    wrongText = ctk.CTkLabel(dashboard, text="Typing Mistakes", text_color="#535353", font=geist12px)
+    wrongLabel = ctk.CTkLabel(dashboard, text="", image=missedImage)
+    counting = ctk.CTkLabel(widget1, text="", text_color="#F2F2F2", font=geist65px)
+    rL = ctk.CTkLabel(widget1, text="Right / Wrong", text_color="#535353", font=geist12px)
 
     # Widget2 Elements
-    accuracyText = ctk.CTkLabel(widget2, text="Accuracy", text_color="#F2F2F2", font=widgetFont)
-    accuracy = ctk.CTkLabel(widget2, text="", text_color="#F2F2F2", font=widgetFont2)
-    accuracyLabel = ctk.CTkLabel(widget2, text="", image=accuracyImage)
+    accuracyText = ctk.CTkLabel(dashboard, text="Accuracy", text_color="#535353", font=geist12px)
+    accuracyLabel = ctk.CTkLabel(dashboard, text="", image=accuracyImage)
+    accuracy = ctk.CTkLabel(widget2, text="", text_color="#F2F2F2", font=geist65px)
+    acL = ctk.CTkLabel(widget2, text="of accurate code", text_color="#535353", font=geist12px)
 
     # Widget3 Elements
-    wordsPerMinuteText = ctk.CTkLabel(widget3, text="Words Per Minute", text_color="#F2F2F2", font=widgetFont)
-    wordsPerMinute = ctk.CTkLabel(widget3, text="", text_color="#F2F2F2", font=widgetFont2)
-    wpmLabel = ctk.CTkLabel(widget3, text="", image=wpmImage)
+    wordsPerMinuteText = ctk.CTkLabel(dashboard, text="Words Per Minute", text_color="#535353", font=geist12px)
+    wpmLabel = ctk.CTkLabel(dashboard, text="", image=wpmImage)
+    wordsPerMinute = ctk.CTkLabel(widget3, text="", text_color="#F2F2F2", font=geist65px)
+    wpmLittle = ctk.CTkLabel(widget3, text="wpm", text_color="#535353", font=geist12px)
 
+    # Widget4 Elements
+    versionText = ctk.CTkLabel(dashboard, text="Current Version", text_color="#535353", font=geist12px)
+    versionLabel = ctk.CTkLabel(dashboard, text="", image=commitImage)
+    versionNum = ctk.CTkLabel(widget4, text="1", text_color="#FFFFFF", font=geist65px)
+    publicRelease = ctk.CTkLabel(widget4, text="Public Release", text_color="#535353", font=geist12px)
 
-    # Widget Positioning
-    widget1.place(x=106, y=168)
-    wrongText.place(x=143, y=11)
-    wrongDesc.place(x=255, y=36)
-    counting.place(x=13, y=88)
-    wrongLabel.place(x=16, y=13)
+    # Positioning
+    lastDiff.place(x=37, y=80)
+    difficultyText.place(x=159, y=80)
 
-    widget2.place(x=488, y=168)
-    accuracyText.place(x=213, y=11)
-    accuracy.place(x=12, y=88)
-    accuracyLabel.place(x=16, y=13)
+    widget1.place(x=148, y=186)
+    wrongText.place(x=176, y=156)
+    wrongLabel.place(x=148, y=158)
+    counting.place(x=7, y=143)
+    rL.place(x=7, y=130)
 
-    widget3.place(x=870, y=168)
-    wordsPerMinuteText.place(x=159, y=11)
-    wordsPerMinute.place(x=14, y=88)
-    wpmLabel.place(x=16, y=13)
+    widget2.place(x=401, y=186)
+    accuracyText.place(x=429, y=156)
+    accuracyLabel.place(x=401, y=158)
+    accuracy.place(x=7, y=143)
+    acL.place(x=7, y=130)
+
+    widget3.place(x=654, y=186)
+    wordsPerMinuteText.place(x=682, y=156)
+    wordsPerMinute.place(x=7, y=143)
+    wpmLabel.place(x=654, y=158)
+
+    widget4.place(x=907, y=186)
+    versionText.place(x=935, y=156)
+    versionLabel.place(x=907, y=158)
+    versionNum.place(x=7, y=143)
+    publicRelease.place(x=56, y=190)
 
     return dashboard
