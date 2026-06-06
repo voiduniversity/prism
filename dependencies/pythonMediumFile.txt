@@ -4,11 +4,11 @@ newString = ""
 isClear = False
 count = 0
 for char in string:
-count += 1
 if char in badChars:
 continue
 else:
+count += 1
 newString = newString + char
-if count==len(string) and count==len(newString):
+if count==len(string):
 isClear = True
 return newString, isClear

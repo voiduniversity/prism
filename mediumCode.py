@@ -53,7 +53,7 @@ def mediumFrame(root):
     def submitCode():
         global timer
         timer = 0
-        timerLabel.configure(text=30)
+        timerLabel.configure(text=60)
         userFrame.configure(state="disabled")
         submitButton.configure(state="disabled")
         startButton.configure(state="normmal")
@@ -147,12 +147,12 @@ def mediumFrame(root):
     circleOne = ctk.CTkFrame(windowFrame, fg_color="#323232", width=13, height=13, corner_radius=18)
     circleTwo = ctk.CTkFrame(windowFrame, fg_color="#424242", width=13, height=13, corner_radius=18)
     circleThree = ctk.CTkFrame(windowFrame, fg_color="#595959", width=13, height=13, corner_radius=18)
-    timerLabel = ctk.CTkLabel(windowFrame, text="60", text_color="#636363", font=("Inter 24pt", 16))
+    timerLabel = ctk.CTkLabel(windowFrame, text="60", text_color="#636363", font=("Geist Mono", 16))
     timerImage = ctk.CTkImage(light_image=Image.open(f"{currentDir}/elements/timer.png"), dark_image=Image.open(f"{currentDir}/elements/timer.png"), size=(17, 17))
     timerLogo = ctk.CTkLabel(windowFrame, text="", image=timerImage)
 
 
-    languageType = ctk.CTkLabel(windowFrame, text="python", text_color="#636363", font=("Inter 24pt", 16))
+    languageType = ctk.CTkLabel(windowFrame, text="python", text_color="#636363", font=("Geist Mono", 16))
     startImage = ctk.CTkImage(light_image=Image.open(f"{currentDir}/elements/start.png"), dark_image=Image.open(f"{currentDir}/elements/start.png"), size=(15, 15))
     startButton = ctk.CTkButton(windowFrame, text="", image=startImage, text_color="#F2F2F2", text_color_disabled="#636363", fg_color="#121212", hover_color="#121212", width=82, height=22, border_width=1, border_color="#636363", corner_radius=29, command=resetTimer)
     submitImage = ctk.CTkImage(light_image=Image.open(f"{currentDir}/elements/submit.png"), dark_image=Image.open(f"{currentDir}/elements/submit.png"), size=(15, 15))
@@ -197,9 +197,9 @@ def mediumFrame(root):
     lineFive.place(x=25, y=87)
     lineSix.place(x=25, y=129)
     lineSeven.place(x=41, y=149)
-    lineEight.place(x=41, y=172)
-    lineNine.place(x=58, y=192)
-    lineTen.place(x=41, y=212)
+    lineEight.place(x=58, y=172)
+    lineNine.place(x=41, y=192)
+    lineTen.place(x=58, y=212)
     lineEleven.place(x=58, y=232)
     lineTwelve.place(x=25, y=276)
     lineThirteen.place(x=41, y=296)

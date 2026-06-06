@@ -147,12 +147,12 @@ def easyFrame(root):
     circleOne = ctk.CTkFrame(windowFrame, fg_color="#323232", width=13, height=13, corner_radius=18)
     circleTwo = ctk.CTkFrame(windowFrame, fg_color="#424242", width=13, height=13, corner_radius=18)
     circleThree = ctk.CTkFrame(windowFrame, fg_color="#595959", width=13, height=13, corner_radius=18)
-    timerLabel = ctk.CTkLabel(windowFrame, text="60", text_color="#636363", font=("Inter 24pt", 16))
+    timerLabel = ctk.CTkLabel(windowFrame, text="60", text_color="#636363", font=("Geist Mono", 16))
     timerImage = ctk.CTkImage(light_image=Image.open(f"{currentDir}/elements/timer.png"), dark_image=Image.open(f"{currentDir}/elements/timer.png"), size=(17, 17))
     timerLogo = ctk.CTkLabel(windowFrame, text="", image=timerImage)
 
 
-    languageType = ctk.CTkLabel(windowFrame, text="python", text_color="#636363", font=("Inter 24pt", 16))
+    languageType = ctk.CTkLabel(windowFrame, text="python", text_color="#636363", font=("Geist Mono", 16))
     startImage = ctk.CTkImage(light_image=Image.open(f"{currentDir}/elements/start.png"), dark_image=Image.open(f"{currentDir}/elements/start.png"), size=(15, 15))
     startButton = ctk.CTkButton(windowFrame, text="", image=startImage, text_color="#F2F2F2", text_color_disabled="#636363", fg_color="#121212", hover_color="#121212", width=82, height=22, border_width=1, border_color="#636363", corner_radius=29, command=resetTimer)
     submitImage = ctk.CTkImage(light_image=Image.open(f"{currentDir}/elements/submit.png"), dark_image=Image.open(f"{currentDir}/elements/submit.png"), size=(15, 15))
