@@ -1,7 +1,0 @@
-def numbers(int):
-listNums = []
-for num in range(int):
-listNums.append(num)
-def main():
-print(numbers(10))
-main()
