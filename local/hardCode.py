@@ -3,7 +3,7 @@ import tkinter as tk
 from PIL import Image
 import os
 
-currentDir = os.getcwd()
+currentDir = os.path.dirname(__file__)
 
 python = f"{currentDir}/dependencies/pythonHardFile.txt"
 score = f"{currentDir}/dependencies/scoring.txt"

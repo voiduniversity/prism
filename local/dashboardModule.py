@@ -6,7 +6,8 @@ import os
 
 from PIL import Image
 
-currentDir = os.getcwd()
+currentDir = os.path.dirname(__file__)
+
 
 easyScore = f"{currentDir}/dependencies/scoring.txt"
 userScore = 0

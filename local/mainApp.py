@@ -12,7 +12,7 @@ from mediumCode import mediumFrame, mediumPython
 from hardCode import hardFrame, hardPython
 
 # Get the directory that the folder is in
-currentDir = os.getcwd()
+currentDir = os.path.dirname(__file__)
 
 # Get information from dependencies
 user = f"{currentDir}/dependencies/username.txt"
