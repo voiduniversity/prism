@@ -5,7 +5,7 @@ import os
 
 currentDir = os.getcwd()
 
-python = f"{currentDir}/dependencies/pythonMediumFile.txt"
+python = f"{currentDir}/dependencies/pythonHardFile.txt"
 score = f"{currentDir}/dependencies/scoring.txt"
 pythonCodeLines = []
 pyhtonExample = ""
@@ -16,7 +16,7 @@ codecount = f"{currentDir}/dependencies/counted.txt"
 diff = f"{currentDir}/dependencies/recentDifficulty.txt"
 
 # Load Python Code Lines & Return the string
-def mediumPython():
+def hardPython():
     global pythonExample
 
     with open(python) as pythonFile:
@@ -32,7 +32,7 @@ def mediumPython():
             pythonExample = example
     
 
-def mediumFrame(root):
+def hardFrame(root):
     
     codingFont = ctk.CTkFont(family="JetBrains Mono NL", 
                     size=16, 
@@ -106,7 +106,7 @@ def mediumFrame(root):
             timeTaken.write(str(elapsed))
         
         with open(diff, "w") as diffiulty:
-            diffiulty.write("Medium")
+            diffiulty.write("Hard")
 
         with open(codecount, "w") as counting:
             counting.write(str(len(pythonExample)))

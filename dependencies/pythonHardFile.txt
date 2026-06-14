@@ -1,0 +1,14 @@
+def hashMap(mapped: dict) -> str:
+m = float("-inf")
+kv = ""
+for k in mapped:
+if mapped[k] > m:
+m = mapped[k]
+kv = k
+return kv 
+def report(key: str) -> None:
+print(f"The character with the most occurences is: {key}")
+def main():
+keyHM = hashMap({"a":200, "b":102, "c":432})
+report(keyHM)
+main()
