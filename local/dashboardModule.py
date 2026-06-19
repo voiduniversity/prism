@@ -9,7 +9,7 @@ from PIL import Image
 currentDir = os.path.dirname(__file__)
 
 
-easyScore = f"{currentDir}/dependencies/scoring.txt"
+scores = f"{currentDir}/dependencies/scoring.txt"
 userScore = 0
 
 elapsed = f"{currentDir}/dependencies/elapsedTime.txt"
@@ -17,6 +17,8 @@ elapsed = f"{currentDir}/dependencies/elapsedTime.txt"
 totalLength = f"{currentDir}/dependencies/counted.txt"
 
 diff = f"{currentDir}/dependencies/recentDifficulty.txt"
+
+usernameFile = f"{currentDir}/dependencies/username.txt"
  
 def dashboardFrame(root):
 
@@ -34,7 +36,7 @@ def dashboardFrame(root):
                 except:
                     currentTime = 0
     
-            with open(easyScore) as scoreFile:
+            with open(scores) as scoreFile:
                 userScore = scoreFile.read()
 
             with open(totalLength) as total:
@@ -47,8 +49,8 @@ def dashboardFrame(root):
                 difficultyText.configure(text=f"{difficulty}")
 
             if userScore != "":
+                wrong = int(length) - int(userScore) 
                 if int(userScore) != int(length):
-                    wrong = int(length) - int(userScore) 
                     counting.configure(text=f"{userScore}/{wrong}")
                 else:
                     counting.configure(text=f"{userScore}/0")
@@ -98,6 +100,75 @@ def dashboardFrame(root):
                         size=65, 
                         slant="roman", # slant roman/italic
                         )
+    
+    # Change username Top Level
+    def changeUsernameFunc():
+        changeWindow = ctk.CTkToplevel(root)
+        changeWindow.title("prism // change your username")
+        # changeWindow width x height
+        changeWidth = 1280
+        changeHeight = 720
+
+        # Grabs the users screen width and height
+        screenWidth = root.winfo_screenwidth()
+        screenHeight = root.winfo_screenheight()
+
+        # Center Mathematic
+        centerX = (screenWidth / 2) - (changeWidth / 2)
+        centerY = (screenHeight / 2) - (changeHeight / 2)
+
+        # prism geometry // apps resolution + center mechanic
+        changeWindow.geometry(f"{changeWidth}x{changeHeight}+{int(centerX)}+{int(centerY)}")
+
+        changeWindow.configure(fg_color="#121212")
+
+        # Fonts
+        logoFont = ctk.CTkFont(family="Instrument Serif", 
+                        size=40,
+                        weight="normal",
+                        slant="roman", # slant roman/italic
+                        )
+        
+        geist18px = ctk.CTkFont(family="Geist Mono",
+                            size=18,
+                            weight="normal",
+                            slant="roman")
+
+        def closeWindow():
+            user = userInput.get()
+            if user == "" or len(user) == 0:
+                emptyUserInput.place(x=855, y=309)
+                changeWindow.after(3000, lambda: emptyUserInput.place(y=721))
+            else:
+                with open(usernameFile, "w") as userFile:
+                    userFile.write(user)
+                with open(elapsed, "w") as elapsedTime:
+                    elapsedTime.write("")
+                with open(scores, "w") as currentScore:
+                    currentScore.write("")
+                with open(totalLength, "w") as typedRight:
+                    typedRight.write("")
+                with open(diff, "w") as difficultyFile:
+                    difficultyFile.write("")
+
+                changeWindow.destroy()
+                root.destroy()
+                
+        # Elements 
+        logoWelcome = ctk.CTkLabel(changeWindow, text="prism", font=logoFont, text_color="#F2F2F2")
+        userInput = ctk.CTkEntry(changeWindow, placeholder_text="Enter your new username", text_color="#F2F2F2", fg_color="#121212", border_width=1, border_color="#636363", width=268, height=43, corner_radius=29)
+        submitButton = ctk.CTkButton(changeWindow, text="Submit", font=geist18px, text_color="#000000", fg_color="#F2F2F2", hover_color="#DCDCDC", width=164, height=43, corner_radius=29, command=closeWindow)
+        emptyUserInput = ctk.CTkLabel(changeWindow, text="!", font=logoFont, text_color="#FE5F55")
+        universitylogo = ctk.CTkImage(light_image=Image.open(f"{currentDir}/elements/6niversitylogo.png"), dark_image=Image.open(f"{currentDir}/elements/6niversitylogo.png"), size=(100, 100))
+        logoLabel = ctk.CTkLabel(changeWindow, text="", image=universitylogo, width=100, height=100)
+        warningLabel = ctk.CTkLabel(changeWindow, text="WARNING: ALL PROGRESS WILL BE DELETED", font=geist12px, text_color="#535353", width=267, height=16)
+
+        # Placing them
+        logoWelcome.place(x=411, y=309)
+        logoLabel.place(x=0, y=620)
+        userInput.place(x=411, y=369)
+        submitButton.place(x=704, y=369)
+        warningLabel.place(x=506, y=438)
 
     # Dashboard Frame
     dashboard = ctk.CTkFrame(root, fg_color="#121212", width=1280, height=720)
@@ -109,8 +180,8 @@ def dashboardFrame(root):
     commitImage = ctk.CTkImage(light_image=Image.open(f"{currentDir}/elements/commit.png"), dark_image=Image.open(f"{currentDir}/elements/commit.png"), size=(23, 23))
 
     # Last Difficulty
-    lastDiff = ctk.CTkLabel(root, text="Last Difficulty:", text_color="#535353", font=geist12px)
-    difficultyText = ctk.CTkLabel(root, text="None", text_color="#FFFFFF", font=geist12px)
+    lastDiff = ctk.CTkLabel(dashboard, text="Last Difficulty:", text_color="#535353", font=geist12px)
+    difficultyText = ctk.CTkLabel(dashboard, text="None", text_color="#FFFFFF", font=geist12px)
 
     # Apeparance // Frames
     widget1 = ctk.CTkFrame(dashboard, fg_color="#232323", width=224, height=224, corner_radius=12)
@@ -142,9 +213,13 @@ def dashboardFrame(root):
     versionNum = ctk.CTkLabel(widget4, text="1", text_color="#FFFFFF", font=geist52px)
     publicRelease = ctk.CTkLabel(widget4, text="Public Release", text_color="#535353", font=geist12px)
 
+    # Change username
+    changeUsernameButton = ctk.CTkButton(dashboard, text="Change Username", fg_color="#FFFFFF", text_color="#000000", hover_color="#DCDCDC", font=geist16px, corner_radius=50, width=171, height=31, command=changeUsernameFunc)
+
     # Positioning
     lastDiff.place(x=37, y=80)
     difficultyText.place(x=159, y=80)
+    changeUsernameButton.place(x=1076, y=31)
 
     widget1.place(x=148, y=186)
     wrongText.place(x=176, y=156)

@@ -28,11 +28,10 @@ ctk.set_default_color_theme("blue")
 
 # Main App
 def codeType(): 
-
     root = ctk.CTk()
     root.title("prism // @voiduniversity")
 
-    # codeType width x height
+    # prism width x height
     rootWidth = 1280
     rootHeight = 720
 
@@ -44,7 +43,7 @@ def codeType():
     centerX = (screenWidth / 2) - (rootWidth / 2)
     centerY = (screenHeight / 2) - (rootHeight / 2)
 
-    # codeType geometry // apps resolution + center mechanic
+    # prism geometry // apps resolution + center mechanic
     root.geometry(f"{rootWidth}x{rootHeight}+{int(centerX)}+{int(centerY)}")
 
     root.configure(fg_color="#121212")
@@ -67,7 +66,7 @@ def codeType():
                             size=16,
                             slant="roman")
 
-    # Top Level Window // remake unfinished
+    # Top Level Window
     with open(user) as usernameFile:
         username = usernameFile.read().strip("/n")
         if username == "":
